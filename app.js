@@ -11,8 +11,8 @@ var localFilePath="/Users/16399/practice/oktadelegate/";
 var serverFilePath="/home/okta/oktadelegate/";
 
 var options = {
-  key: fs.readFileSync(localFilePath + 'client-key.pem'),
-  cert: fs.readFileSync(localFilePath + 'client-cert.pem')
+  key: fs.readFileSync(serverFilePath + 'client-key.pem'),
+  cert: fs.readFileSync(serverFilePath + 'client-cert.pem')
 };
 
 /**
