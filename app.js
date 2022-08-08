@@ -174,6 +174,10 @@ function authenticationRequired(req, res, next) {
 	});
 }
 
+app.get('/testService', function(req, res){
+	res.send('Service Working');
+  });
+  
 
 app.post('/delegate/init', authenticationRequired, (req, res) => {
 	var sessionid = req.jwt.claims.sessionid;
