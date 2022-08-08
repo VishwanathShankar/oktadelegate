@@ -18,14 +18,14 @@ var options = {
 /**
  * Environment variables
  */
-const base_url = process.env.BASE_URL || 'https://dev-123.oktapreview.com'
-const issuer = process.env.ISSUER || 'https://dev-123.oktapreview.com/oauth2/default'
+const base_url = process.env.BASE_URL || 'https://dev-48396690.okta.com'
+const issuer = process.env.ISSUER || 'https://dev-48396690.okta.com/oauth2/default'
 const client_id = process.env.CLIENT_ID || 'clientid'
 const assert_aud = process.env.ASSERT_AUD || 'api://default'
 const assert_scope = process.env.ASSERT_SCOPE || 'groupadmin'
-const SSWS = process.env.SSWS || 'sswskey'
-const client_username = process.env.CLIENT_USERNAME || 'username'
-const client_password = process.env.CLIENT_PASSWORD || 'password'
+const SSWS = process.env.SSWS || '00cp-n2MrpfdwmqruYJyC1awutddUrvkoE78CKAJEF'
+const client_username = process.env.CLIENT_USERNAME || 'serviceaccountusername'
+const client_password = process.env.CLIENT_PASSWORD || 'password123#'
 const time_limit = process.env.TIME_LIMIT || '60'
 
 const redis_client = redis.createClient(6379, process.env.ELASTICACHE_CONNECT_STRING);
