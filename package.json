@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
-    "zip": "rm deploy-manually/oktadelegate.zip ; zip deploy-manually/oktadelegate.zip -@ < zip.list"
+    "zip": "rm deploy-manually/oktadelegate.zip ; zip deploy-manually/oktadelegate.zip -@ < zip.list",
+    "okta": "00cp-n2MrpfdwmqruYJyC1awutddUrvkoE78CKAJEF"
   },
   "author": "zeekhoo",
   "license": "ISC",
