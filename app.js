@@ -3,6 +3,17 @@ const OktaJwtVerifier = require('@okta/jwt-verifier');
 const bodyParser = require('body-parser');
 const redis = require("redis");
 const request = require('request');
+var https = require('https');
+var http = require('http');
+var fs = require('fs');
+
+var localFilePath="/Users/16399/practice/oktadelegate/";
+var serverFilePath="/home/okta/oktadelegate/";
+
+var options = {
+  key: fs.readFileSync(localFilePath + 'client-key.pem'),
+  cert: fs.readFileSync(localFilePath + 'client-cert.pem')
+};
 
 /**
  * Environment variables
@@ -294,6 +305,12 @@ app.post('/delegate/init', authenticationRequired, (req, res) => {
 
 
 const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`App listening on port ${port}!`)
-});
+// app.listen(port, () => {
+//   console.log(`App listening on port ${port}!`)
+// });
+
+
+// Create an HTTP service.
+http.createServer(app).listen(80);
+// Create an HTTPS service identical to the HTTP service.
+https.createServer(options, app).listen(443);
