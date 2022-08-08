@@ -65,6 +65,7 @@ function callbackAuthRequired(req, res, next) {
 }
 
 app.post('/delegate/hook/callback', callbackAuthRequired, (req, res) => {
+	console.log("Inside /delegate/hook/callback");
 	/*
 	 * sessionid:
 	 * Use a value that uniquely identifies the transaction. context.session.id is the best choice 
@@ -175,11 +176,13 @@ function authenticationRequired(req, res, next) {
 }
 
 app.get('/testService', function(req, res){
+	console.log("Inside /testService");
 	res.send('Service Working');
   });
   
 
 app.post('/delegate/init', authenticationRequired, (req, res) => {
+	console.log("Inside /delegate/init");
 	var sessionid = req.jwt.claims.sessionid;
 	
 	// The Bearer token to this api call contains a "uid" claim. This is the Okta userId
