@@ -10,10 +10,10 @@ var fs = require('fs');
 var localFilePath="/Users/16399/practice/oktadelegate/";
 var serverFilePath="/home/okta/oktadelegate/";
 
-var options = {
-  key: fs.readFileSync(serverFilePath + 'client-key.pem'),
-  cert: fs.readFileSync(serverFilePath + 'client-cert.pem')
-};
+// var options = {
+//   key: fs.readFileSync(localFilePath + 'client-key.pem'),
+//   cert: fs.readFileSync(localFilePath + 'client-cert.pem')
+// };
 
 /**
  * Environment variables
@@ -28,10 +28,22 @@ const client_username = process.env.CLIENT_USERNAME || 'serviceaccountusername'
 const client_password = process.env.CLIENT_PASSWORD || 'password123#'
 const time_limit = process.env.TIME_LIMIT || '60'
 
-const redis_client = redis.createClient(6379, process.env.ELASTICACHE_CONNECT_STRING);
+//const redis_client = redis.createClient(6379, "20.219.65.156");
+const redis_client = redis.createClient({
+	host: '20.219.65.156', // The redis's server ip 
+	port: 6379,
+
+});
+
 redis_client.on("error", function (err) {
     console.log("Error " + err);
 });
+
+redis_client.on('connect', function() {
+	console.log('Connected! to Redis');
+});
+
+  
 
 const app = express();
 app.use(bodyParser.json());
@@ -311,13 +323,13 @@ app.post('/delegate/init', authenticationRequired, (req, res) => {
 });
 
 
-const port = process.env.PORT || 3000;
-// app.listen(port, () => {
-//   console.log(`App listening on port ${port}!`)
-// });
+const port = process.env.PORT || 80;
+app.listen(port, () => {
+  console.log(`App listening on port ${port}!`)
+});
 
 
-// Create an HTTP service.
-http.createServer(app).listen(80);
-// Create an HTTPS service identical to the HTTP service.
-https.createServer(options, app).listen(443);
+// // Create an HTTP service.
+// http.createServer(app).listen(80);
+// // Create an HTTPS service identical to the HTTP service.
+// https.createServer(options, app).listen(443);
