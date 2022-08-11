@@ -59,19 +59,24 @@ app.use(function(req, res, next) {
  * This is middleware that asserts valid credentials are passed into the Callback Request
  */
 function callbackAuthRequired(req, res, next) {
+	console.log("Inside callbackAuthRequired");
 	const authHeader = req.headers.authorization || '';
 	const match = authHeader.match(/Basic (.+)/);
 
 	if (!match) {
+		console.log("No match");
 		return res.status(401).end();
 	}
 
 	const credentials = match[1];
 	var auth = Buffer.from(client_username + ':' + client_password).toString('base64');
 
+
 	if (credentials === auth) {
+		console.log("Credentials matched auth");
 		next();		
 	} else {
+		console.log("Credentials do not match auth");
 		res.status(401).send('Callback Request Not authorized');
 	}
 }
@@ -91,6 +96,7 @@ app.post('/delegate/hook/callback', callbackAuthRequired, (req, res) => {
 
 	// redis "get" operation
 	function redis_get_promise(key) {
+		console.log("Inside redis_get_promise");
 		return new Promise((resolve, reject) => {
 			redis_client.get(key, (error, result) => {
 				if (error) throw error;
@@ -102,6 +108,7 @@ app.post('/delegate/hook/callback', callbackAuthRequired, (req, res) => {
 
 	// redis "del" operation
 	function redis_del_promise(key) {
+		console.log("Inside redis_del_promise");
 		return new Promise((resolve, reject) => {
 			redis_client.del(key, (error, result) => {
 				resolve(result);
@@ -110,6 +117,7 @@ app.post('/delegate/hook/callback', callbackAuthRequired, (req, res) => {
 	}
 
 	async function callback(key) {
+		console.log("Inside callback function");
 		var profile = await redis_get_promise(key);
 		var del = await redis_del_promise(key);
 		console.log('del='+del);
@@ -195,6 +203,7 @@ app.get('/testService', function(req, res){
 
 app.post('/delegate/init', authenticationRequired, (req, res) => {
 	console.log("Inside /delegate/init");
+	console.log(req.jwt.claims);
 	var sessionid = req.jwt.claims.sessionid;
 	
 	// The Bearer token to this api call contains a "uid" claim. This is the Okta userId

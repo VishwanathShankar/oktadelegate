@@ -1,0 +1,79 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: tmp-oktadelegate-ingress
+  namespace: dev
+  uid: 60318cc3-6a5a-450c-b748-11c13f543ae3
+  resourceVersion: '420004000'
+  generation: 1
+  creationTimestamp: '2022-04-20T08:13:31Z'
+  labels:
+    app: tmp-oktadelegate
+    owner: omnicell-india
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-route53
+    kubectl.kubernetes.io/last-applied-configuration: >
+      {"apiVersion":"networking.k8s.io/v1","kind":"Ingress","metadata":{"annotations":{"cert-manager.io/cluster-issuer":"letsencrypt-route53","kubernetes.io/tls-acme":"true"},"creationTimestamp":"2022-02-15T11:35:19Z","generation":1,"labels":{"app":"tmp-oktadelegate"},"name":"tmp-oktadelegate-ingress","namespace":"dev","resourceVersion":"394891710","uid":"4093619d-d2da-4e22-977d-60c4b94aa030"},"spec":{"ingressClassName":"nginx","rules":[{"host":"tmp-oktadelegate.devng-int.myomnicell.com","http":{"paths":[{"backend":{"service":{"name":"tmp-oktadelegate","port":{"number":80}}},"path":"/","pathType":"Prefix"}]}},{"host":"tmp-oktadelegate.devng.myomnicell.com","http":{"paths":[{"backend":{"service":{"name":"tmp-oktadelegate","port":{"number":80}}},"path":"/","pathType":"Prefix"}]}}],"tls":[{"hosts":["tmp-oktadelegate.devng-int.myomnicell.com","tmp-oktadelegate.devng.myomnicell.com"],"secretName":"tmp-oktadelegate-tls-cert"}]},"status":{"loadBalancer":{}}}
+    kubernetes.io/tls-acme: 'true'
+  managedFields:
+    - manager: kubectl-client-side-apply
+      operation: Update
+      apiVersion: networking.k8s.io/v1
+      time: '2022-04-20T08:13:31Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:cert-manager.io/cluster-issuer: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+            f:kubernetes.io/tls-acme: {}
+          f:labels:
+            .: {}
+            f:app: {}
+        f:spec:
+          f:ingressClassName: {}
+          f:rules: {}
+          f:tls: {}
+    - manager: nginx-ingress-controller
+      operation: Update
+      apiVersion: networking.k8s.io/v1
+      time: '2022-04-20T08:14:34Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:loadBalancer:
+            f:ingress: {}
+  selfLink: /apis/networking.k8s.io/v1/namespaces/dev/ingresses/tmp-oktadelegate-ingress
+status:
+  loadBalancer:
+    ingress:
+      - ip: 168.62.201.9
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - tmp-oktadelegate.devng-int.myomnicell.com
+        - tmp-oktadelegate.devng.myomnicell.com
+      secretName: tmp-oktadelegate-tls-cert
+  rules:
+    - host: tmp-oktadelegate.devng-int.myomnicell.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: tmp-oktadelegate
+                port:
+                  number: 80
+    - host: tmp-oktadelegate.devng.myomnicell.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: tmp-oktadelegate
+                port:
+                  number: 80

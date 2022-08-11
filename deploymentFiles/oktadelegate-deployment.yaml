@@ -1,0 +1,198 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tmp-oktadelegate
+  namespace: dev
+  uid: a5b883f3-4770-437a-ba85-1dfc59f2b8ae
+  resourceVersion: '513942188'
+  generation: 11
+  creationTimestamp: '2022-03-22T12:33:16Z'
+  labels:
+    app: tmp-oktadelegate
+    owner: omnicell-india
+  annotations:
+    deployment.kubernetes.io/revision: '11'
+    kubectl.kubernetes.io/last-applied-configuration: >
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"creationTimestamp":null,"labels":{"app":"tmp-oktadelegate"},"name":"tmp-oktadelegate","namespace":"dev"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"tmp-oktadelegate"}},"strategy":{},"template":{"metadata":{"creationTimestamp":null,"labels":{"app":"tmp-oktadelegate"}},"spec":{"containers":[{"env":[{"name":"oktadelegate_ADMIN","value":"admin"},{"name":"oktadelegate_ADMIN_PASSWORD","value":"admin"},{"name":"KC_PROXY","value":"edge"},{"name":"PROXY_ADDRESS_FORWARDING","value":"true"}],"image":"quay.io/oktadelegate/oktadelegate:16.0.0","name":"oktadelegate","ports":[{"containerPort":80,"name":"http"}],"resources":{}}]}}},"status":{}}
+  managedFields:
+    - manager: kubectl-client-side-apply
+      operation: Update
+      apiVersion: apps/v1
+      time: '2022-03-22T12:33:16Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:labels:
+            .: {}
+            f:app: {}
+        f:spec:
+          f:progressDeadlineSeconds: {}
+          f:replicas: {}
+          f:revisionHistoryLimit: {}
+          f:selector: {}
+          f:strategy:
+            f:rollingUpdate:
+              .: {}
+              f:maxSurge: {}
+              f:maxUnavailable: {}
+            f:type: {}
+          f:template:
+            f:metadata:
+              f:labels:
+                .: {}
+                f:app: {}
+            f:spec:
+              f:containers:
+                k:{"name":"oktadelegate"}:
+                  .: {}
+                  f:env:
+                    .: {}
+                    k:{"name":"KC_PROXY"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"PROXY_ADDRESS_FORWARDING"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                  f:imagePullPolicy: {}
+                  f:name: {}
+                  f:ports:
+                    .: {}
+                    k:{"containerPort":80,"protocol":"TCP"}:
+                      .: {}
+                      f:containerPort: {}
+                      f:name: {}
+                      f:protocol: {}
+                  f:resources: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+              f:dnsPolicy: {}
+              f:restartPolicy: {}
+              f:schedulerName: {}
+              f:securityContext: {}
+              f:terminationGracePeriodSeconds: {}
+    - manager: node-fetch
+      operation: Update
+      apiVersion: apps/v1
+      time: '2022-08-05T11:06:55Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          f:template:
+            f:metadata:
+              f:annotations:
+                .: {}
+                f:kubectl.kubernetes.io/restartedAt: {}
+            f:spec:
+              f:containers:
+                k:{"name":"oktadelegate"}:
+                  f:env:
+                    k:{"name":"oktadelegate_PASSWORD"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"oktadelegate_USER"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                  f:image: {}
+              f:imagePullSecrets:
+                .: {}
+                k:{"name":"jfrog-io-secret-ro"}:
+                  .: {}
+                  f:name: {}
+    - manager: kube-controller-manager
+      operation: Update
+      apiVersion: apps/v1
+      time: '2022-08-09T08:35:40Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:deployment.kubernetes.io/revision: {}
+        f:status:
+          f:availableReplicas: {}
+          f:conditions:
+            .: {}
+            k:{"type":"Available"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:lastUpdateTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"Progressing"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:lastUpdateTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+          f:observedGeneration: {}
+          f:readyReplicas: {}
+          f:replicas: {}
+          f:updatedReplicas: {}
+  selfLink: /apis/apps/v1/namespaces/dev/deployments/tmp-oktadelegate
+status:
+  observedGeneration: 11
+  replicas: 1
+  updatedReplicas: 1
+  readyReplicas: 1
+  availableReplicas: 1
+  conditions:
+    - type: Progressing
+      status: 'True'
+      lastUpdateTime: '2022-08-05T11:26:39Z'
+      lastTransitionTime: '2022-08-05T11:25:52Z'
+      reason: NewReplicaSetAvailable
+      message: ReplicaSet "tmp-oktadelegate-5f5446bff" has successfully progressed.
+    - type: Available
+      status: 'True'
+      lastUpdateTime: '2022-08-09T08:35:40Z'
+      lastTransitionTime: '2022-08-09T08:35:40Z'
+      reason: MinimumReplicasAvailable
+      message: Deployment has minimum availability.
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tmp-oktadelegate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: tmp-oktadelegate
+      annotations:
+        kubectl.kubernetes.io/restartedAt: '2022-03-23T12:51:26Z'
+    spec:
+      containers:
+        - name: oktadelegate
+          image: omnicell.jfrog.io/nextgen-docker-user/oktadelegate:vishwa
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      imagePullSecrets:
+        - name: jfrog-io-secret-ro
+      schedulerName: default-scheduler
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
